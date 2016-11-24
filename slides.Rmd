@@ -380,9 +380,15 @@ worldmap + geom_point(data=CO2.all.loc, aes(x=lon, y=lat, group=1), colour="red"
 ## US politics - 2016 election
 
 - US election process is complicated - depends on the electoral votes for each state in a winner takes all approach
-- Polls released on a regular basis
+- Polls released on a regular basis ([Real Clear Politics](http://www.realclearpolitics.com/elections/live_results/2016_general/president/))
 - [Monitoring the Election Visually](http://chance.amstat.org/files/2010/12/Visually.pdf)
 - [Can You Buy a President? Politics After the Tillman Act](http://chance.amstat.org/2014/02/president/)
+
+## Play a game
+
+1. Scramble the association between pollster and result
+2. Put data plot in a random location among the plots of permuted data samples
+3. Ask your reader to pick the plot thta is different
 
 ---
 
@@ -431,7 +437,7 @@ ggplot(lineup(null_permute('Poll_big'), polls, n=4),
 
 ## GOP Swing
 
-```{r fig.align='center', fig.width=12, fig.height=8}
+```{r fig.align='center', fig.width=8, fig.height=8}
 pres <- read_csv("data2016.csv")
 pres_smry <- pres %>% 
   filter(cand_name %in% c("Donald Trump","Hillary Clinton")) %>%
@@ -492,33 +498,33 @@ p1 <- ggplot(filter(elections, State.Postal == "WI"),
             aes(x=Reppct, y=Rep16-Reppct, 
     label=County.Name)) + #, colour=state)) +
   geom_hline(yintercept=0, colour="white", size=2) + 
-  geom_point(alpha=0.5) +
+  geom_point(alpha=0.8, size=2) +
   theme(aspect.ratio=1) + 
-  coord_equal() + xlab("2012") + ylab("2016-2012") + 
+  xlab("2012") + ylab("2016-2012") + 
   ggtitle("Wisconsin") + theme(legend.position="none")
 p2 <- ggplot(filter(elections, State.Postal == "MI"), 
             aes(x=Reppct, y=Rep16-Reppct, 
     label=County.Name)) + #, colour=state)) +
   geom_hline(yintercept=0, colour="white", size=2) + 
-  geom_point(alpha=0.5) +
+  geom_point(alpha=0.8, size=2) +
   theme(aspect.ratio=1) + 
-  coord_equal() + xlab("2012") + ylab("2016-2012") + 
+  xlab("2012") + ylab("2016-2012") + 
   ggtitle("Michigan") + theme(legend.position="none")
 p3 <- ggplot(filter(elections, State.Postal == "IA"), 
             aes(x=Reppct, y=Rep16-Reppct, 
     label=County.Name)) + #, colour=state)) +
   geom_hline(yintercept=0, colour="white", size=2) + 
-  geom_point(alpha=0.5) +
+  geom_point(alpha=0.8, size=2) +
   theme(aspect.ratio=1) + 
-  coord_equal() + xlab("2012") + ylab("2016-2012") + 
+  xlab("2012") + ylab("2016-2012") + 
   ggtitle("Iowa") + theme(legend.position="none")
 p4 <- ggplot(filter(elections, State.Postal == "UT"), 
             aes(x=Reppct, y=Rep16-Reppct, 
     label=County.Name)) + #, colour=state)) +
   geom_hline(yintercept=0, colour="white", size=2) + 
-  geom_point(alpha=0.5) +
+  geom_point(alpha=0.8, size=2) +
   theme(aspect.ratio=1) + 
-  coord_equal() + xlab("2012") + ylab("2016-2012") + 
+  xlab("2012") + ylab("2016-2012") + 
   ggtitle("Utah") + theme(legend.position="none")
 grid.arrange(p1, p2, p3, p4, ncol=2)
 #library(plotly)
@@ -595,6 +601,7 @@ ggmap(melb) + geom_point(data=ped_loc,
 
 \centerline{\includegraphics[width=4in]{sensor_locations.pdf}}
 
+[http://www.pedestrian.melbourne.vic.gov.au](http://www.pedestrian.melbourne.vic.gov.au)
 ---
 
 ```{r eval=FALSE, echo = FALSE, message = FALSE, warning = FALSE, fig.align='center'}
