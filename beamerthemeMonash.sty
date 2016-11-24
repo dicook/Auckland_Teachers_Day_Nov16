@@ -1,0 +1,147 @@
+% Loosely based on Boadilla by Manuel Carro
+% Original:
+% Copyright 2004 by Manuel Carro <mcarro@fi.upm.es>
+%
+% This program can be redistributed and/or modified under the terms
+% of the GNU Public License, version 2.
+%
+% Modified by Raymond Nepstad to create the ift theme
+% Then modified by Rob Hyndman to create the monash theme
+
+\mode<presentation>
+
+\newif\ifbeamer@secheader
+\beamer@secheaderfalse
+
+\DeclareOptionBeamer{secheader}{\beamer@secheadertrue}
+\ProcessOptionsBeamer
+
+
+\ifbeamer@secheader\else\setbeamertemplate{headline}[default]\fi
+
+%% SIZE OF TEXT
+
+\setbeamersize{text margin left=1em,text margin right=1em}
+
+%% COLORS
+
+\definecolor{monashblue}{RGB}{6, 84, 142}
+\definecolor{orange}{RGB}{204, 89, 0}
+
+\setbeamercolor{title in footer}{fg=white,bg=monashblue!95!white}
+\setbeamercolor{section in footer}{fg=white,bg=monashblue!85!white}
+\setbeamercolor{pagenumber in footer}{fg=white,bg=monashblue!75!white}
+
+\setbeamercolor{enumerate item}{fg=red,bg=red!20!white}
+\setbeamercolor{enumerate subitem}{fg=red,bg=red!20!white}
+\setbeamercolor{enumerate}{fg=red,bg=red}
+\setbeamercolor{itemize item}{fg=orange}
+\setbeamercolor{itemize subitem}{fg=orange!50!yellow}
+\setbeamercolor{frametitle}{fg=monashblue}
+\setbeamercolor{title}{fg=black}
+\setbeamercolor{section}{fg=monashblue}
+\setbeamercolor{subsection}{fg=monashblue}
+\setbeamercolor{itemize}{fg=black}
+\setbeamercolor{alerted text}{fg=orange}
+\setbeamercolor{block body alerted}{fg=white,bg=orange}
+\setbeamercolor{block body}{fg=black,bg=black!20!white} %monashblue!20!white} %bg=black!40!white}
+\setbeamercolor{structure}{fg=monashblue}
+\setbeamercolor{block title}{bg=white,fg=monashblue}
+\setbeamercolor{block title alerted}{fg=white,bg=black}
+
+%% FONTS
+
+\usefonttheme{structurebold}
+\setbeamerfont{frametitle}{size=\Large,series=\bfseries}
+\setbeamerfont{title}{size=\LARGE,series=\bfseries}
+\setbeamerfont{author}{family=\bfseries}
+
+%% THEME CHOICES
+
+\useinnertheme[shadow]{rounded}
+\useinnertheme{squares}
+\setbeamertemplate{items}[square]
+\setbeamercovered{highly dynamic}
+
+%% Footer
+
+\defbeamertemplate*{footline}{ifttheme}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.9\paperwidth,ht=2.25ex,dp=1ex,center]{title in footer}%
+    \insertshorttitle
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.0\paperwidth,ht=2.25ex,dp=1ex,center]{section in footer}%
+    \insertsectionhead
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.1\paperwidth,ht=2.25ex,dp=1ex,center]{pagenumber in footer}%
+   \insertframenumber{}/\inserttotalframenumber{} \hspace*{2ex} 
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+
+%% TITLE PAGE
+
+\setbeamertemplate{title page}
+{%\setbeamertemplate{footline}[plain]
+\vspace*{-3.1cm}\par
+\hspace*{-0.5cm}{\includegraphics[width=1.05\paperwidth,height=1.05\paperheight]{monashblue_title.jpg}}
+\vspace*{-8cm}\par
+\begin{beamercolorbox}[wd=0.6\paperwidth]{Title}
+\usebeamerfont{Title}%
+{\color{white}\Large\bf
+\inserttitle
+}
+\par
+{\color{white}\large
+\insertauthor
+}
+\par
+{\color{white}
+\insertdate
+}
+\end{beamercolorbox}
+    %{\vbox to 2cm{\usebeamerfont{title}\inserttitle}\vfill\vss}
+    %{\vbox to 2cm{\vfill \textbf{\insertauthor}}}
+  %\fbox{\hbox to 3cm {\usebeamerfont{title}\inserttitle}\hfil}
+}
+
+\setbeamertemplate{background}
+ {\raisebox{2cm}{\includegraphics[width=1.0\paperwidth,height=0.2\paperheight]{monash-slide.pdf}}}
+
+\setbeamertemplate{footline}[ifttheme]
+
+%% FRAME TITLES
+
+\setbeamertemplate{frametitle}{\vspace{0.2cm} {\color{white}  \insertframetitle}\vspace*{0.2cm}}
+
+
+%% OUTLINES at start of each section
+
+\AtBeginSection[] {
+  \begin{frame} %<beamer>%[squeeze]
+  \frametitle{Outline}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+\def\notoc{\AtBeginSection[]{}}
+
+%% No navigation buttons
+\beamertemplatenavigationsymbolsempty
+
+
+\mode
+<all>
+
+
+%% POSITIONING OF TEXTBLOCKS
+
+\usepackage{pifont}
+\usepackage[absolute,overlay]{textpos}
+\setlength{\TPHorizModule}{1cm}
+\setlength{\TPVertModule}{1cm}
+
+\def\placefig#1#2#3#4{\begin{textblock}{.1}(#1,#2)\rlap{\includegraphics[#3]{#4}}\end{textblock}}
+\def\fullheight#1{\begin{textblock}{12.8}(0,.93)\centerline{\includegraphics[height=8.3cm]{#1}}\end{textblock}}
+\def\fullwidth#1{\begin{textblock}{12.8}(0,.93)\centerline{\includegraphics[width=12.8cm]{#1}}\end{textblock}}
